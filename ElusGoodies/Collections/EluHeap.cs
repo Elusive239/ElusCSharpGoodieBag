@@ -85,10 +85,19 @@ namespace ElusGoodies.Collections
             itemA.heapIndex = itemB.heapIndex;
             itemB.heapIndex = temp; 
         }
-    }
-}
 
-public interface IHeapItem<T> : IComparable<T>
-{
-    int heapIndex{get; set;}
+        public T this[int index]{ 
+            //Then do whatever you need to return/set here.
+            get{
+                return this.items[index];
+            }
+            set{
+                this.items[index] = value;
+            } 
+        }
+    }
+    public interface IHeapItem<T> : IComparable<T>
+    {
+        int heapIndex{get; set;}
+    }
 }
