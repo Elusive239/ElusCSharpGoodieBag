@@ -13,6 +13,16 @@ namespace ElusGoodies.Vectors
         public static Vector2 down => new Vector2(0, -1);
         public static Vector2 right => new Vector2(1, 0);
         public static Vector2 left => new Vector2(-1, 0);
+        public float Magnitude => (float) Math.Sqrt(x*x + y*y);
+        public static Vector2 Direction (Vector2 startingPos, Vector2 endPos, bool normalize){
+            Vector2 temp = endPos-startingPos;
+            if(normalize){
+                temp.x = (float)Math.Clamp( Math.Round(temp.x) , -1, 1);
+                temp.y = (float)Math.Clamp( Math.Round(temp.y) , -1, 1);
+            }
+            
+            return temp;
+        }
         public static float Distance(Vector2 one, Vector2 two)
         {
             float x = (two.x - one.x);

@@ -26,9 +26,8 @@ namespace ElusGoodies.Collections
             return true;
         }
 
-        public T Peek(){
-            return stack[count-1];
-        }
+        public T Peek() => stack[count-1];
+        
 
         public T Pop(){
             count --;
