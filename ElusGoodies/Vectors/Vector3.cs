@@ -16,13 +16,16 @@ namespace ElusGoodies.Vectors
         public static Vector3 forward => new Vector3(0, 0, 1);
         public static Vector3 back => new Vector3(0, 0, -1);
 
-        public float Magnitude => (float)Math.Sqrt(x*x + y*y + z*z);
+        public float magnitude => (float)Math.Sqrt(x*x + y*y + z*z);
+        public Vector3 normalize => new Vector3 (
+            (float)Math.Clamp( Math.Round(x) , -1, 1),
+            (float)Math.Clamp( Math.Round(y) , -1, 1),
+            (float)Math.Clamp( Math.Round(z) , -1, 1)
+        );
         public static Vector3 Direction (Vector3 startingPos, Vector3 endPos, bool normalize){
             Vector3 temp = endPos - startingPos;
             if(normalize){
-                temp.x = (float)Math.Clamp( Math.Round(temp.x) , -1, 1);
-                temp.y = (float)Math.Clamp( Math.Round(temp.y) , -1, 1);
-                temp.z = (float)Math.Clamp( Math.Round(temp.z) , -1, 1);
+                temp = temp.normalize;
             }
             
             return temp;

@@ -13,25 +13,26 @@ namespace ElusGoodies.Vectors
         public static Vector2 down => new Vector2(0, -1);
         public static Vector2 right => new Vector2(1, 0);
         public static Vector2 left => new Vector2(-1, 0);
-        public float Magnitude => (float) Math.Sqrt(x*x + y*y);
+        public float magnitude => (float) Math.Sqrt(x*x + y*y);
+        public Vector2 normalize => new Vector3 (
+            (float)Math.Clamp( Math.Round(x) , -1, 1),
+            (float)Math.Clamp( Math.Round(y) , -1, 1)
+        );
         public static Vector2 Direction (Vector2 startingPos, Vector2 endPos, bool normalize){
             Vector2 temp = endPos-startingPos;
             if(normalize){
-                temp.x = (float)Math.Clamp( Math.Round(temp.x) , -1, 1);
-                temp.y = (float)Math.Clamp( Math.Round(temp.y) , -1, 1);
+                temp = temp.normalize;
             }
             
             return temp;
         }
-        public static float Distance(Vector2 one, Vector2 two)
-        {
+        public static float Distance(Vector2 one, Vector2 two){
             float x = (two.x - one.x);
             float y = (two.y - one.y);
             return (float)Math.Sqrt((x * x) + (y * y));
         }
 
-        public bool Equals(Vector2 other)
-        {
+        public bool Equals(Vector2 other){
             float thisX = x * 100, thisY = y * 100, otherX = other.x * 100, otherY = other.y * 100;
             thisX = (float)Math.Round(thisX) / 100f;
             thisY = (float)Math.Round(thisY) / 100f;
@@ -49,8 +50,7 @@ namespace ElusGoodies.Vectors
         public static Vector2 operator *(Vector2 one, Vector2 two) => new Vector2(one.x * two.x, one.y * two.y);
         public static Vector2 operator *(Vector2 one, float two) => new Vector2(one.x * two, one.y * two);
         public static Vector2 operator *(Vector2 two, Vector3 one) => new Vector2(one.x * two.x, one.y * two.y);
-        public static Vector2 operator /(Vector2 one, Vector2 two)
-        {
+        public static Vector2 operator /(Vector2 one, Vector2 two){
             float x = one.x / two.x,
             y = one.y / two.y;
 
@@ -59,9 +59,7 @@ namespace ElusGoodies.Vectors
 
             return new Vector2(x, y);
         }
-        public static Vector2 operator /(Vector2 two, Vector3 one)
-        {
-
+        public static Vector2 operator /(Vector2 two, Vector3 one){
             float x = one.x / two.x,
             y = one.y / two.y;
 
