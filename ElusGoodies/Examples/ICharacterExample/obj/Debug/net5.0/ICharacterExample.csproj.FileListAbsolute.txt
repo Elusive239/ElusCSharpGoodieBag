@@ -1,0 +1,16 @@
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/bin/Debug/net5.0/ICharacterExample
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/bin/Debug/net5.0/ICharacterExample.deps.json
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/bin/Debug/net5.0/ICharacterExample.runtimeconfig.json
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/bin/Debug/net5.0/ICharacterExample.runtimeconfig.dev.json
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/bin/Debug/net5.0/ICharacterExample.dll
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/bin/Debug/net5.0/ref/ICharacterExample.dll
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/bin/Debug/net5.0/ICharacterExample.pdb
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/obj/Debug/net5.0/ICharacterExample.csproj.AssemblyReference.cache
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/obj/Debug/net5.0/ICharacterExample.GeneratedMSBuildEditorConfig.editorconfig
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/obj/Debug/net5.0/ICharacterExample.AssemblyInfoInputs.cache
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/obj/Debug/net5.0/ICharacterExample.AssemblyInfo.cs
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/obj/Debug/net5.0/ICharacterExample.csproj.CoreCompileInputs.cache
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/obj/Debug/net5.0/ICharacterExample.dll
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/obj/Debug/net5.0/ref/ICharacterExample.dll
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/obj/Debug/net5.0/ICharacterExample.pdb
+/home/elusive/Downloads/Chrome/VSCode/CSharpStuff/ElusGoodies/Examples/ICharacterExample/obj/Debug/net5.0/ICharacterExample.genruntimeconfig.cache

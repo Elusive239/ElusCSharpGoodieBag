@@ -1,4 +1,5 @@
 using System;
+
 namespace ElusGoodies
 {
     public enum Team

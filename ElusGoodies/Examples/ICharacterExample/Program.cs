@@ -7,14 +7,23 @@ namespace ICharacterExample
     {
         static void Main(string[] args)
         {
-            
+            Character c = new Character(4, 4, 4, 4, Team.Player , "11");
+            Character s = new Character(4, 4, 4, 4, Team.Enemy1 , "12");
+
+            while(c.isDead == s.isDead){
+                c.Attack(s);
+                s.Attack(c);
+
+                if(c.isDead || s.isDead) break;
+            }
         }
     }
     class Character : ICharacter{
-        public int health { get; set; }
+        public int health { get; set;}
+        int hp;
         public string charName {get; set;}
         int END, STR, AGI, INT;
-        Team team { get; set; }
+        public Team team{get; set;}
         bool canDoStuff = true;
 
         public Character(int _END, int _STR, int _AGI, int _INT, Team _team, string _charName){
@@ -25,11 +34,11 @@ namespace ICharacterExample
             team = _team;
             charName = _charName;
 
-            health = end*2 + 4;
+            health = END*2 + 4;
         }
         
         public bool Attack(ICharacter target){
-            if(target.GetStat(4)) return false;
+            if(target.GetStat(4) == Convert.ToInt32(team) || isDead) return false;
 
             target.health -= STR;
             if(target.health <= 0)
@@ -38,7 +47,6 @@ namespace ICharacterExample
         }
         public void Die(ICharacter killer){
             Console.WriteLine(charName +" killed "+killer.charName+"!");
-            isDead = true;
         }
         /// <summary>
         /// Should return one of the stats at the given ID. assumes that your 
@@ -53,7 +61,7 @@ namespace ICharacterExample
                 case 1: return STR;
                 case 2: return AGI;
                 case 3: return INT;
-                case 4: return team;
+                case 4: return Convert.ToInt32(team);
                 case 5: return health;
                 default: return 0;
             }
@@ -64,11 +72,11 @@ namespace ICharacterExample
                 case 1: STR = value; break;
                 case 2: AGI = value; break;
                 case 3: INT = value; break;
-                case 4: team = value; break;
+                case 4: team = (Team) value ; break;
                 case 5: health = value; break;
             }
         }
-        bool isDead { get {return health <= 0;} }
-        bool canMove{get {return canDoStuff || isDead;}}
+        public bool isDead { get {return health <= 0;} }
+        public bool canMove{get {return canDoStuff || isDead;}}
     }
 }
