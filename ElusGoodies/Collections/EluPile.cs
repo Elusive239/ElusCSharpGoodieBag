@@ -5,6 +5,7 @@ namespace ElusGoodies.Collections
     public class EluPile<T> : IEnumerator, IEnumerable where T : class, IEquatable<T>, IPileable {
         public int Count{get;set;}
         public T[] items;
+
         public EluPile(){
             items = new T[10];
             Count = 0;
@@ -15,7 +16,7 @@ namespace ElusGoodies.Collections
         }
 
         public bool Add(T item){
-            if(Count > 0)
+            if(Contains(item))
             foreach (T t in this)
             {
                 if(t.Equals(item)){
@@ -30,6 +31,18 @@ namespace ElusGoodies.Collections
     
             items[Count] = item;
             Count++;
+        }
+
+        public bool Contains(T item){
+            if(Count <= 0) return false;
+
+            foreach (T t in this)
+            {
+                if(t.Equals(item)){
+                    return true;
+                }
+            }
+            return false;
         }
 
         //IEnumerator and IEnumerable require these methods.
@@ -66,6 +79,7 @@ namespace ElusGoodies.Collections
                 this.items[index] = value;
             } 
         }
+
     }
     public interface IPileable{
         int itemAmount{get;set;}
