@@ -2,7 +2,7 @@ using System;
 
 namespace ElusGoodies.Collections
 {
-    public class EluPile<T> : IEnumerator, IEnumerable where T : class, IEquatable<T>, IPileable {
+    public class EluPile<T> : IEnumerator, IEnumerable where T :  IEquatable<T>, IPileable {
         public int Count{get;set;}
         public T[] items;
 
@@ -82,6 +82,9 @@ namespace ElusGoodies.Collections
         }
 
     }
+    /// <summary>
+    /// Required to be implemented for an item to be put in a pile.
+    /// </summary>
     public interface IPileable{
         /// <summary>
         /// Amount of the item you have
