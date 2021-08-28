@@ -19,7 +19,7 @@ namespace ElusGoodies.Collections
             if(Contains(item))
             foreach (T t in this)
             {
-                if(t.Equals(item)){
+                if(t.Equals(item) && t.itemAmount  < t.itemCapacity){
                     t.itemAmount++;
                     return true;
                 }
@@ -30,7 +30,8 @@ namespace ElusGoodies.Collections
             }
     
             items[Count] = item;
-            Count++;
+            item.itemAmount++;
+            Count++;    
         }
 
         public bool Contains(T item){
@@ -82,6 +83,15 @@ namespace ElusGoodies.Collections
 
     }
     public interface IPileable{
+        /// <summary>
+        /// Amount of the item you have
+        /// </summary>
+        /// <value></value>
         int itemAmount{get;set;}
+        /// <summary>
+        /// Amount of the item that you CAN have in this slot
+        /// </summary>
+        /// <value></value>
+        int itemCapacity{get; set;}
     }
 }
