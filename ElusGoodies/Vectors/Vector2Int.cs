@@ -14,9 +14,9 @@ namespace ElusGoodies.Vectors
         public static Vector2Int right => new Vector2Int(1, 0);
         public static Vector2Int left => new Vector2Int(-1, 0);
         public int magnitude => (int) Math.Sqrt(x*x + y*y);
-        public Vector2Int normalize => new Vector3Int (
-            (int)Math.Clamp( Math.Round(x) , -1, 1),
-            (int)Math.Clamp( Math.Round(y) , -1, 1)
+        public Vector2Int normalize => new Vector2Int (
+            Math.Clamp( x , -1, 1),
+            Math.Clamp( y, -1, 1)
         );
         public static Vector2Int Direction (Vector2Int startingPos, Vector2Int endPos, bool normalize){
             Vector2Int temp = endPos-startingPos;

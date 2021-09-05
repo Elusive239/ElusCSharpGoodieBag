@@ -14,7 +14,7 @@ namespace ElusGoodies.Vectors
         public static Vector2 right => new Vector2(1, 0);
         public static Vector2 left => new Vector2(-1, 0);
         public float magnitude => (float) Math.Sqrt(x*x + y*y);
-        public Vector2 normalize => new Vector3 (
+        public Vector2 normalize => new Vector2 (
             (float)Math.Clamp( Math.Round(x) , -1, 1),
             (float)Math.Clamp( Math.Round(y) , -1, 1)
         );

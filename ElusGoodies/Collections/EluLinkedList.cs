@@ -54,6 +54,16 @@ namespace ElusGoodies.Collections{
             return NaN;
         }
 
+        public void Set(int index, T value){
+            EluNode<T> current = head;
+            for(int i = 0; i <= index; i++){
+                if(i == index) {
+                    current.item = value;
+                }
+                current = current.next;
+            }
+        }
+
         public void ReplaceAt(T item, int index){
             Node<T> replacement = new Node<T>(item);
             if(index == 0){
@@ -103,9 +113,9 @@ namespace ElusGoodies.Collections{
        public T this[int index]{ 
             //Then do whatever you need to return/set here.
             get{
-                return this.items[index];
+                return this.Get(index);
             } set{
-                this.items[index] = value;
+                this.Set(index, value);
             }
         }
     }

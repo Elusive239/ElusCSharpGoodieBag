@@ -18,9 +18,9 @@ namespace ElusGoodies.Vectors
 
         public int magnitude => (int)Math.Sqrt(x*x + y*y + z*z);
         public Vector3Int normalize => new Vector3Int (
-            (int)Math.Clamp( Math.Round(x) , -1, 1),
-            (int)Math.Clamp( Math.Round(y) , -1, 1),
-            (int)Math.Clamp( Math.Round(z) , -1, 1)
+            Math.Clamp( x , -1, 1),
+            Math.Clamp( y, -1, 1), 
+            Math.Clamp( z, -1, 1)
         );
         public static Vector3Int Direction (Vector3Int startingPos, Vector3Int endPos, bool normalize){
             Vector3Int temp = endPos - startingPos;
