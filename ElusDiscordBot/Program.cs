@@ -9,6 +9,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 
+//heavily followed this guy to start, will hopefully end up with cool stuff by the end lol.
 //https://www.youtube.com/watch?v=e2iaRVf4sho
 namespace ElusDiscordBot
 {
