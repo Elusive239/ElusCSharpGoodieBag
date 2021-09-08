@@ -14,7 +14,7 @@ namespace ElusDiscordBot.Modules
         static Random randomness = new Random();
         public static CommandService commandServerices;
 
-        [Command("ping"), Summary("Check if bot is running")]
+        [Command("ping"), Summary("Quick check to see if bot is running")]
         public async Task Ping() => await ReplyAsync("pong");
 
         [Command("bish"),Summary("Call someone a bish")]
