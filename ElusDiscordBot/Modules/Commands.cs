@@ -1,20 +1,23 @@
 using System;
+using System.Linq;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
-using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+
 
 namespace ElusDiscordBot.Modules
 {
     public class Commands : ModuleBase<SocketCommandContext>{
 
         static Random randomness = new Random();
+        public static CommandService services;
 
-        [Command("ping")]
+        [Command("ping"), Summary("Check if bot is running")]
         public async Task Ping() => await ReplyAsync("pong");
 
-        [Command("bish")]
+        [Command("bish"),Summary("Call someone a bish")]
         public async Task CallSomeOneABitch(SocketGuildUser user){
             if(user == null){
                 await ReplyAsync("specify a person to call a bish please.");
@@ -25,14 +28,14 @@ namespace ElusDiscordBot.Modules
             }
         }
 
-        [Command("duel")]
+        [Command("duel"), Summary("Duel some bishs")]
         public async Task TimeToFight( SocketGuildUser user2){
             SocketGuildUser user1 = Context.User as SocketGuildUser;
             if(user1 == null || user2 == null){
                 await ReplyAsync("Requires two users as inputs.");
                 return;
             }
-            
+
             DateTime dt = new DateTime();
 
             long startTime = dt.Millisecond;
@@ -64,6 +67,30 @@ namespace ElusDiscordBot.Modules
             }
         }
 
+        //https://stackoverflow.com/questions/7617771/converting-from-ienumerable-to-list/7617783
+        [Command("help")]
+        public async Task Help()
+        {
+            List<CommandInfo> commands = services.Commands.ToList();
+            EmbedBuilder embedBuilder = new EmbedBuilder();
 
+            if(commands == null){
+                await ReplyAsync("CommandInfo list is null. no commands?");
+            }
+
+            foreach (CommandInfo command in commands)
+            {
+                if(command.Name == "help"){
+                    continue;
+                }
+
+                // Get the command Summary attribute information
+                string embedFieldText = command.Summary ?? "No description available\n";
+
+                embedBuilder.AddField(command.Name, embedFieldText);
+            }
+
+            await ReplyAsync("Here's a list of commands and their description: ", false, embedBuilder.Build());
+        }
     }   
 }

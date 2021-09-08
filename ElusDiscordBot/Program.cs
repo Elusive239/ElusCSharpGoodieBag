@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
-
+using ElusDiscordBot.Modules;
 //heavily followed this guy to start, will hopefully end up with cool stuff by the end lol.
 //https://www.youtube.com/watch?v=e2iaRVf4sho
 namespace ElusDiscordBot
@@ -28,6 +25,8 @@ namespace ElusDiscordBot
             .AddSingleton(client)
             .AddSingleton(commands)
             .BuildServiceProvider();
+
+            Commands.services = commands;
 
             string token = System.IO.File.ReadAllText("Token.txt");
             client.Log += client_log;
