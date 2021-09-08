@@ -32,6 +32,7 @@ namespace ElusDiscordBot.Modules
                 await ReplyAsync("Requires two users as inputs.");
                 return;
             }
+            
             DateTime dt = new DateTime();
 
             long startTime = dt.Millisecond;
@@ -62,5 +63,7 @@ namespace ElusDiscordBot.Modules
                 await ReplyAsync(user2.Mention + " drew first! GG!");
             }
         }
+
+
     }   
 }
