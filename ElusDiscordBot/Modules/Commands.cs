@@ -26,7 +26,8 @@ namespace ElusDiscordBot.Modules
         }
 
         [Command("duel")]
-        public async Task TimeToFight(SocketGuildUser user1, SocketGuildUser user2){
+        public async Task TimeToFight( SocketGuildUser user2){
+            SocketGuildUser user1 = Context.User as SocketGuildUser;
             if(user1 == null || user2 == null){
                 await ReplyAsync("Requires two users as inputs.");
                 return;
@@ -35,21 +36,25 @@ namespace ElusDiscordBot.Modules
 
             long startTime = dt.Millisecond;
             long currentTime = startTime;
-            long endTime = startTime + 3000001;
+            long endTime = startTime + 30000000;
+
+            var duel = await ReplyAsync("Get ready to duel!");
+            bool rand = (randomness.Next(20) + 1) / 10 == 1;
 
             while (currentTime < endTime){
                 currentTime++;
-                if(currentTime - startTime == 1000000){
-                    await ReplyAsync("One...");
-                }else if(currentTime - startTime == 2000000){
-                    await ReplyAsync("Two...");
-                }else if(currentTime - startTime == 3000000){
-                    await ReplyAsync("Three...");
+                if(currentTime - startTime == 15000000){
+                    await duel.DeleteAsync();
+                    duel = await ReplyAsync("Three...");
+                }else if(currentTime - startTime == 20000000){
+                    await duel.DeleteAsync();
+                    duel = await ReplyAsync("Two...");
+                }else if(currentTime - startTime == 25000000){
+                    await duel.DeleteAsync();
+                    duel = await ReplyAsync("One...");
                 }
             }   
             await ReplyAsync("DRAW!");
-
-            bool rand = (randomness.Next(20) + 1) / 10 == 1;
 
             if(rand){
                 await ReplyAsync(user1.Mention + " drew first! GG!");
