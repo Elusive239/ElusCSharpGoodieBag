@@ -12,7 +12,7 @@ namespace ElusDiscordBot.Modules
     public class Commands : ModuleBase<SocketCommandContext>{
 
         static Random randomness = new Random();
-        public static CommandService services;
+        public static CommandService commandServerices;
 
         [Command("ping"), Summary("Check if bot is running")]
         public async Task Ping() => await ReplyAsync("pong");
@@ -28,7 +28,7 @@ namespace ElusDiscordBot.Modules
             }
         }
 
-        [Command("duel"), Summary("Duel some bishs")]
+        [Command("duel"), Summary("Duel whoever you @")]
         public async Task TimeToFight( SocketGuildUser user2){
             SocketGuildUser user1 = Context.User as SocketGuildUser;
             if(user1 == null || user2 == null){
@@ -71,7 +71,7 @@ namespace ElusDiscordBot.Modules
         [Command("help")]
         public async Task Help()
         {
-            List<CommandInfo> commands = services.Commands.ToList();
+            List<CommandInfo> commands = commandServerices.Commands.ToList();
             EmbedBuilder embedBuilder = new EmbedBuilder();
 
             if(commands == null){
@@ -92,5 +92,7 @@ namespace ElusDiscordBot.Modules
 
             await ReplyAsync("Here's a list of commands and their description: ", false, embedBuilder.Build());
         }
+
+
     }   
 }

@@ -26,7 +26,7 @@ namespace ElusDiscordBot
             .AddSingleton(commands)
             .BuildServiceProvider();
 
-            Commands.services = commands;
+            Commands.commandServerices = commands;
 
             string token = System.IO.File.ReadAllText("Token.txt");
             client.Log += client_log;
