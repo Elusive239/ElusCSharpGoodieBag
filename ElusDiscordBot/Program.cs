@@ -12,9 +12,19 @@ using ElusDiscordBot.Modules;
 //https://www.youtube.com/watch?v=e2iaRVf4sho
 namespace ElusDiscordBot
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args){ 
+        public static void Main(string[] args){ 
+            points = new Dictionary<string, int>();
+
+            if(Commands.instance != null){
+                try{
+                    Commands.instance.client.LogoutAsync();
+                }catch(Exception e) {
+                    Console.WriteLine("Log out fucked up."+e);
+                }
+            }
+
             try{
                 StreamReader sr = new StreamReader("Points");
                 
@@ -35,21 +45,13 @@ namespace ElusDiscordBot
 
             new Program().RunBotAsync().GetAwaiter().GetResult();
 
-            try{
-                StreamWriter sr = new StreamWriter("Points");
-                foreach (KeyValuePair<string, int> pair in points){
-                    sr.WriteLine(pair.Key + ", " + pair.Value);
-                }
-                sr.Close();
-            } catch(Exception e) {
-                Console.WriteLine("Exception: " + e.Message);
-            }
+            
         }
 
-        DiscordSocketClient client;
+        public DiscordSocketClient client;
         CommandService commands;
         IServiceProvider services;
-        static Dictionary<string, int> points = new Dictionary<string, int>();
+        static Dictionary<string, int> points;
 
         public async Task RunBotAsync(){
             client = new DiscordSocketClient();
@@ -58,6 +60,7 @@ namespace ElusDiscordBot
             .AddSingleton(client)
             .AddSingleton(commands)
             .BuildServiceProvider();
+            Commands.instance = this;
 
             Commands.commandServerices = commands;
 
@@ -101,38 +104,24 @@ namespace ElusDiscordBot
             }
         }
 
-        /*public void Init(){
-            String line;
+        public async Task SavePoints(){
+            if(points.Count < 1) return;
 
-            
-            var users = ; 
-            Dictionary<SocketGuildUser, int> allAddedUsers = new Dictionary<SocketGuildUser, int>();
-            
             try{
-                StreamReader sr = new StreamReader("PlayerPoints");
-                
-                line = sr.ReadLine();
-                while (line != null){
-                    //format: Username, points
-                    string[] split = line.Split(", ");
-                    string userName = split[0].Trim();
-                    int i = -1;
-
-                    foreach (var item in users){
-                        i++;
-                        Console.WriteLine(users.ToString());
-                        if(userName == users.ToString()){
-                            break;
-                        }    
-                    }
-                    allAddedUsers.Add(users[i], int.Parse(split[1].Trim()));
-                    line = sr.ReadLine();
+                StreamWriter sr = new StreamWriter("Points");
+                foreach (KeyValuePair<string, int> pair in points){
+                    sr.WriteLine(pair.Key + ", " + pair.Value);
                 }
                 sr.Close();
             } catch(Exception e) {
                 Console.WriteLine("Exception: " + e.Message);
             }
-        }*/
+            await Task.Delay(1);
+        }
+
+        public int GetPoints(string userName){
+            return points.ContainsKey(userName) ? points[userName] : 0;
+        }
 
     }
 }

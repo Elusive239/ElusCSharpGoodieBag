@@ -13,6 +13,7 @@ namespace ElusDiscordBot.Modules
     public class Commands : ModuleBase<SocketCommandContext>{
 
         static Random randomness = new Random();
+        public static Program instance;
         public static CommandService commandServerices;
 
         [Command("ping"), Summary("Quick check to see if bot is running")]
@@ -93,7 +94,18 @@ namespace ElusDiscordBot.Modules
             await ReplyAsync("Here's a list of commands and their description: ", false, embedBuilder.Build());
         }
 
-        //[]
-        
+        [Command("restart")]
+        public async Task Restart(){
+            await ReplyAsync("Restarting! See you soon!");
+            await instance.SavePoints();
+            Program.Main(new string[0]);
+        }
+
+        [Command("points")]
+        public async Task GetPoints(){
+            SocketGuildUser user = Context.User as SocketGuildUser;
+            string userName = Context.Message.Author.Username;
+            await ReplyAsync(Context.User.Mention +" you have "+instance.GetPoints(userName) + " points!");
+        }
     }   
 }
