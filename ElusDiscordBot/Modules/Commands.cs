@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using Discord;
 using Discord.Commands;
@@ -69,8 +70,7 @@ namespace ElusDiscordBot.Modules
 
         //https://stackoverflow.com/questions/7617771/converting-from-ienumerable-to-list/7617783
         [Command("help")]
-        public async Task Help()
-        {
+        public async Task Help(){
             List<CommandInfo> commands = commandServerices.Commands.ToList();
             EmbedBuilder embedBuilder = new EmbedBuilder();
 
@@ -93,6 +93,7 @@ namespace ElusDiscordBot.Modules
             await ReplyAsync("Here's a list of commands and their description: ", false, embedBuilder.Build());
         }
 
-
+        //[]
+        
     }   
 }

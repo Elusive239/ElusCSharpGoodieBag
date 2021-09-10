@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using Discord;
@@ -12,11 +14,42 @@ namespace ElusDiscordBot
 {
     class Program
     {
-        static void Main(string[] args) =>  new Program().RunBotAsync().GetAwaiter().GetResult();
+        static void Main(string[] args){ 
+            try{
+                StreamReader sr = new StreamReader("Points");
+                
+                string line = sr.ReadLine();
+                while (line != null){
+                    //format: Username, points
+                    string[] split = line.Split(", ");
+                    string userName = split[0].Trim();
+                    int point = int.Parse(split[1].Trim());
+                    points.Add(userName, point);
+                    
+                    line = sr.ReadLine();
+                }
+                sr.Close();
+            } catch(Exception e) {
+                Console.WriteLine("Exception: " + e.Message);
+            }
+
+            new Program().RunBotAsync().GetAwaiter().GetResult();
+
+            try{
+                StreamWriter sr = new StreamWriter("Points");
+                foreach (KeyValuePair<string, int> pair in points){
+                    sr.WriteLine(pair.Key + ", " + pair.Value);
+                }
+                sr.Close();
+            } catch(Exception e) {
+                Console.WriteLine("Exception: " + e.Message);
+            }
+        }
 
         DiscordSocketClient client;
         CommandService commands;
         IServiceProvider services;
+        static Dictionary<string, int> points = new Dictionary<string, int>();
 
         public async Task RunBotAsync(){
             client = new DiscordSocketClient();
@@ -58,7 +91,48 @@ namespace ElusDiscordBot
                 if(!result.IsSuccess){
                     Console.WriteLine(result.ErrorReason);
                 }
+            }else{
+                string user = arg.Author.Username;
+                if(points.ContainsKey(user)){
+                    points[user] += 10;
+                }else{
+                    points.Add(user, 10);
+                }
             }
         }
+
+        /*public void Init(){
+            String line;
+
+            
+            var users = ; 
+            Dictionary<SocketGuildUser, int> allAddedUsers = new Dictionary<SocketGuildUser, int>();
+            
+            try{
+                StreamReader sr = new StreamReader("PlayerPoints");
+                
+                line = sr.ReadLine();
+                while (line != null){
+                    //format: Username, points
+                    string[] split = line.Split(", ");
+                    string userName = split[0].Trim();
+                    int i = -1;
+
+                    foreach (var item in users){
+                        i++;
+                        Console.WriteLine(users.ToString());
+                        if(userName == users.ToString()){
+                            break;
+                        }    
+                    }
+                    allAddedUsers.Add(users[i], int.Parse(split[1].Trim()));
+                    line = sr.ReadLine();
+                }
+                sr.Close();
+            } catch(Exception e) {
+                Console.WriteLine("Exception: " + e.Message);
+            }
+        }*/
+
     }
 }
