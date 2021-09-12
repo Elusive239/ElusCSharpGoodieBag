@@ -45,15 +45,16 @@ namespace ElusDiscordBot
 
             new Program().RunBotAsync().GetAwaiter().GetResult();
 
-            
+            Environment.Exit(0);
         }
 
         public DiscordSocketClient client;
         CommandService commands;
         IServiceProvider services;
         static Dictionary<string, int> points;
+        public bool logout = false;
 
-        public async Task RunBotAsync(){
+        public async Task RunBotAsync(){            
             client = new DiscordSocketClient();
             commands = new CommandService();
             services = new ServiceCollection()
@@ -73,17 +74,21 @@ namespace ElusDiscordBot
             await Task.Delay(-1);
         }
 
-        public Task client_log(LogMessage arg){
+        public Task client_log(LogMessage arg){            
             Console.WriteLine(arg);
             return Task.CompletedTask;
         }
 
         public async Task RegisterCommandsAsync(){
+            if(logout) return;
+
             client.MessageReceived += HandleCommandsAsync;
             await commands.AddModulesAsync(Assembly.GetEntryAssembly(), services);
         }
 
         public async Task HandleCommandsAsync(SocketMessage arg){
+            if(logout) return;
+
             var message = arg as SocketUserMessage;
             var context = new SocketCommandContext(client, message);
             if(message.Author.IsBot) return;

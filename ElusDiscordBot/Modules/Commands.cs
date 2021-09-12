@@ -94,11 +94,27 @@ namespace ElusDiscordBot.Modules
             await ReplyAsync("Here's a list of commands and their description: ", false, embedBuilder.Build());
         }
 
-        [Command("restart")]
+        [RequireOwner]
+        [Command("restart"), Summary("Restarts me! Thanks, I needed it!")]
         public async Task Restart(){
             await ReplyAsync("Restarting! See you soon!");
             await instance.SavePoints();
             Program.Main(new string[0]);
+        }
+
+        [RequireOwner]
+        [Command("stop"), Summary("Turns me off! Please don't!")][Alias("exit")]
+        public async Task Exit(){
+            await ReplyAsync("Ow! See you next time!");
+            await instance.SavePoints();
+            try{
+                instance.logout = true;
+                await Task.Run(new Action (() => instance.client.LogoutAsync()));
+                await Task.Delay(1000);
+            }catch{
+                Console.WriteLine("Couldn't logout without error.");
+            }
+            Environment.Exit(0);
         }
 
         [Command("points")]
